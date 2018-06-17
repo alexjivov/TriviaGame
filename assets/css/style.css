@@ -1,0 +1,31 @@
+body {
+    background-image: url("http://al-taiclub.com/images/background-question-mark-clipart-1.jpg");
+    background-repeat: no-repeat; 
+    background-size: 1675px 1000px;
+    height: 800px;   
+}
+
+#gameContainer {
+    width: 50%;
+    background-color: yellow;
+    text-align: center;
+    height: 750px; 
+    margin-top: 50px; 
+    padding-top: 50px;
+    margin-left: 400px; 
+    color: blue; 
+    font-family:'Shrikhand', cursive;
+}
+
+#start-btn {
+    width: 25%;
+    height: 50px; 
+    color: blue;
+    border-width: 5px;
+    border-style: solid; 
+    border-color: blue; 
+    background-color: pink; 
+    font-family: 'Shrikhand', cursive;
+    font-size: large; 
+
+}
