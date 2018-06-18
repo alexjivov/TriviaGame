@@ -68,17 +68,68 @@ startGame: function() {
     trivia.incorrect = 0; 
     clearInterval(timer.timerId);
 
+// make the game section show
+$('#game').show(); 
 
+// reset previous results
+$('#results').html('');
 
+// timer
+$('#timer').text(trivia.timer);
 
+// hide the start button
+$('#start-btn').hide();
 
+$('#time-remaining').show();
 
-    
+//start questions
+trivia.nextQuestion();
+
+},
+//questions and options loop
+nextQuestion : function() {
+
+ //30 second timer
+    trivia.timer = 30;
+    $('#timer').text(trivia.timer);
+
+//timer function - prevent speed up
+    if(!triva.timerOn) {
+        trivia.timerID = setInterval(trivia.timerRunning, 1000);
+    }
+
+//create trivia questions in html
+$.each(questionOptions, function(index, key) {
+    $('#options').append($('<button class="option btn">'+key+'</button'));
+
+})
+},
+//if the timer runs out, make it count as "unanswered"
+timerRunning : function() {
+    // if timer still has time left and not all questions have been asked
+    if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
+        $('#timer').text(trivia.timer);
+        trivia.timer--;
+        }
+    // time is up and unanswered is calculated, run the result
+    else if(trivia.timer === -1) {
+        trivia.unanswered++;
+        clearInterval(trivia.timerId);
+        resultID = setTimeout(trivia.guessResult, 1000);
+        //generate the results in the HTML
+        $('#finalResults').html('<h2>Out of time! The answers were' + Object.values(trivia.answers)[trivia.currentSet] +'</h2');
+    }
+    // if all questiosn shown at the end, show the results
+    else if(trivia.currentSet === Object.key(trivia.questions).length) {
+
+        //add game results up - CHANGE THIS TO FILL IN RESULTS CONTAINER
+        
+            $('#gameContainer').html('<h2>Thanks for playing!</h2>');
+            $('#correct').html("Correct: " + trivia.correct); 
+            $('#incorrect') + trivia.correct;
+            $('#unanswered') + trivia.unanswered;
+
+    }
 }
-
-
-
-
 }
-
 
