@@ -3,24 +3,25 @@ $(document).ready(function() {
     //These are the event listeners for the game functionality
     $("time-remaining").hide();
     $("#start-btn").on('click', trivia.startGame);
-    $(document).on('click', '#option', trivia.guessChecker);
-
+    $(document).on('click', trivia.guessChecker);
+    
 })
+
 
 // variables for the game
 var trivia = {
-    correct = 0,
-    incorrect = 0,
-    unanswered = 0,
-    currentSet = 0,
-    timer: 30,
-    timerOn = false,
-    timerId: '',
+    correct : 0,
+    incorrect : 0,
+    unanswered : 0,
+    currentSet : 0,
+    timer : 30,
+    timerOn : false,
+    timerId : '',
 
 // the questions
 
 questions : {
-    q1:'How Many Seasons of Game of Thrones Are There?',
+    q1:'How Many Sesasons of Game of Thrones Are There?',
     q2:'How many ounces in a pound?',
     q3:'What is the highest level you can reach in World of Warcraft?',
     q4:'How many players are there in a game of Fortnite?',
@@ -47,16 +48,16 @@ options : {
 },
 
 answers : {
-    q1:7,
-    q2:16,
-    q3:125,
-    q4:100,
-    q5:"Dwayne 'The Rock' Johnson",
-    q6:1983,
-    q7:1994,
-    q8:1945,
-    q9:"Richrd Nixon",
-    q10:"Stephen Harper",
+    q1: 7,
+    q2: 16,
+    q3: 125,
+    q4: 100,
+    q5: "Dwayne 'The Rock' Johnson",
+    q6: 1983,
+    q7: 1994,
+    q8: 1945,
+    q9: "Richard Nixon",
+    q10: "Stephen Harper",
 
 },
 // methods to start the trivia game + functions
@@ -94,15 +95,16 @@ nextQuestion : function() {
     $('#timer').text(trivia.timer);
 
 //timer function - prevent speed up
-    if(!triva.timerOn) {
+    if(!trivia.timerOn) {
         trivia.timerID = setInterval(trivia.timerRunning, 1000);
     }
 
 //create trivia questions in html
 $.each(questionOptions, function(index, key) {
-    $('#options').append($('<button class="option btn">'+key+'</button'));
+    $('#options').append($('<button class="option btn">'+ key +'</button'));
 
 })
+
 },
 //if the timer runs out, make it count as "unanswered"
 timerRunning : function() {
@@ -117,7 +119,7 @@ timerRunning : function() {
         clearInterval(trivia.timerId);
         resultID = setTimeout(trivia.guessResult, 1000);
         //generate the results in the HTML
-        $('#finalResults').html('<h2>Out of time! The answers were' + Object.values(trivia.answers)[trivia.currentSet] +'</h2');
+        $('#finalResults').html('<h2>Out of time! The answers were ' + Object.values(trivia.answers)[trivia.currentSet] +'</h2');
     }
     // if all questiosn shown at the end, show the results
     else if(trivia.currentSet === Object.key(trivia.questions).length) {
@@ -128,8 +130,53 @@ timerRunning : function() {
             $('#correct').html("Correct: " + trivia.correct); 
             $('#incorrect') + trivia.correct;
             $('#unanswered') + trivia.unanswered;
+        
+        // hide the game section
 
+            $('#game'),hide();
+
+        // show start button again
+
+            $('#start-btn').show();
     }
+
+    // Evaluating the click options - function
+    function guessChecker() {
+
+        //timer ID for gameResult Time end
+        var resultId;
+
+        //answer to the current asked question
+        var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
+
+        // correct answer method
+        if ($(this).text() === currentAnswer) {
+            trivia.correct++;
+            clearInterval(trivia.timerId);
+            resultId = setTimeout(trivia.guessResult, 1000);
+            $('#results').html('<h2>Correct Answer!</h2>');
+        }
+        else {
+            trivia.incorrect++;
+            resultId = setTimeout(trivia.guessResult, 1000);
+            $('#results').html('<h2>Incorrect Answer!</h2>');
+        }
+    
+    // removing previous questionr esults and options
+    function guessResult() {
+        // next question set
+        trivia.currentSet++;
+
+        //remove the options and results
+        $('#options').remove();
+        $('#results').remove();
+
+        //next question
+        trivia.nextQuestion();
+    }
+    }           
 }
+
 }
+
 
