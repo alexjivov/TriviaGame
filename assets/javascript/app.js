@@ -1,12 +1,5 @@
-$(document).ready(function() {
-
-    //These are the event listeners for the game functionality
-    $("time-remaining").hide();
-    $("#start-btn").on('click', trivia.startGame);
-    $(document).on('click', trivia.guessChecker);
+// All GLOBAL VARIABLES + FUNCTIONS SHOULD BE DECLARED AT THE TOP - running code goes after 
     
-})
-
 
 // variables for the game
 var trivia = {
@@ -99,15 +92,18 @@ nextQuestion : function() {
         trivia.timerID = setInterval(trivia.timerRunning, 1000);
     }
 
+}
+
+};
 //create trivia questions in html
-$.each(questionOptions, function(index, key) {
-    $('#options').append($('<button class="option btn">'+ key +'</button'));
+function createOptions() {
+    $.each(trivia, function(index, key) {
+        $('#options').text($('<button class="option-btn">'+ key +'</button>'));
+    })
 
-})
-
-},
+}
 //if the timer runs out, make it count as "unanswered"
-timerRunning : function() {
+function timerRunning() {
     // if timer still has time left and not all questions have been asked
     if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
         $('#timer').text(trivia.timer);
@@ -140,6 +136,7 @@ timerRunning : function() {
             $('#start-btn').show();
     }
 
+   
     // Evaluating the click options - function
     function guessChecker() {
 
@@ -177,6 +174,20 @@ timerRunning : function() {
     }           
 }
 
-}
+
+$(document).ready(function() {
+
+    //These are the event listeners for the game functionality
+    $("time-remaining").hide();
+    $("#start-btn").on('click', function() {
+        trivia.startGame();
+        createOptions();
+        timerRunning();
+        guessChecker(); 
+    })
 
 
+
+
+
+});
