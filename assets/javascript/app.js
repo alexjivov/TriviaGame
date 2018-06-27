@@ -1,5 +1,5 @@
-// All GLOBAL VARIABLES + FUNCTIONS SHOULD BE DECLARED AT THE TOP - running code goes after 
-    
+ //All GLOBAL VARIABLES + FUNCTIONS SHOULD BE DECLARED AT THE TOP - running code goes after//
+
 
 // variables for the game
 var trivia = {
@@ -36,7 +36,7 @@ options : {
     q7:[1994, 1999, 2002, 2000],
     q8:[1985, 1942, 1939, 1945],
     q9:["Steven Seagal", "Richard Nixon", "John F. Kennedy", "Lyndon B. Johnson"],
-    q10:["Justin Trudeau","Stephen Harper", "Jean Chretien", "John Diefenbaker"] 
+    q10:["Justin Trudeau","Stephen Harper", "Jean Chretien", "John Diefenbaker"]
 
 },
 
@@ -53,17 +53,42 @@ answers : {
     q10: "Stephen Harper",
 
 },
+
+ // Evaluating the click options - function
+ guessChecker:  function() {
+
+    //timer ID for gameResult Time end
+    var resultId;
+
+    //answer to the current asked question
+    var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
+
+    // correct answer method
+    if ($(this).text() === currentAnswer) {
+        trivia.correct++;
+        clearInterval(trivia.timerId);
+        resultId = setTimeout(trivia.guessResult, 1000);
+        $('#results').html('<h2>Correct Answer!</h2>');
+    }
+    else {
+        trivia.incorrect++;
+        resultId = setTimeout(trivia.guessResult, 1000);
+        $('#results').html('<h2>Incorrect Answer!</h2>');
+    }
+
+},
+
 // methods to start the trivia game + functions
 startGame: function() {
     //restart the game
     trivia.currentSet = 0;
     trivia.unanswered = 0;
     trivia.correct = 0;
-    trivia.incorrect = 0; 
+    trivia.incorrect = 0;
     clearInterval(timer.timerId);
 
 // make the game section show
-$('#game').show(); 
+$('#game').show();
 
 // reset previous results
 $('#results').html('');
@@ -89,7 +114,7 @@ nextQuestion : function() {
 
 //timer function - prevent speed up
     if(!trivia.timerOn) {
-        trivia.timerID = setInterval(trivia.timerRunning, 1000);
+        trivia.timerID = setInterval(timerRunning, 1000);
     }
 
 }
@@ -121,12 +146,12 @@ function timerRunning() {
     else if(trivia.currentSet === Object.key(trivia.questions).length) {
 
         //add game results up - CHANGE THIS TO FILL IN RESULTS CONTAINER
-        
+
             $('#gameContainer').html('<h2>Thanks for playing!</h2>');
-            $('#correct').html("Correct: " + trivia.correct); 
+            $('#correct').html("Correct: " + trivia.correct);
             $('#incorrect') + trivia.correct;
             $('#unanswered') + trivia.unanswered;
-        
+
         // hide the game section
 
             $('#game'),hide();
@@ -135,30 +160,8 @@ function timerRunning() {
 
             $('#start-btn').show();
     }
-
    
-    // Evaluating the click options - function
-    function guessChecker() {
 
-        //timer ID for gameResult Time end
-        var resultId;
-
-        //answer to the current asked question
-        var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
-
-        // correct answer method
-        if ($(this).text() === currentAnswer) {
-            trivia.correct++;
-            clearInterval(trivia.timerId);
-            resultId = setTimeout(trivia.guessResult, 1000);
-            $('#results').html('<h2>Correct Answer!</h2>');
-        }
-        else {
-            trivia.incorrect++;
-            resultId = setTimeout(trivia.guessResult, 1000);
-            $('#results').html('<h2>Incorrect Answer!</h2>');
-        }
-    
     // removing previous questionr esults and options
     function guessResult() {
         // next question set
@@ -171,9 +174,7 @@ function timerRunning() {
         //next question
         trivia.nextQuestion();
     }
-    }           
-}
-
+    }
 
 $(document).ready(function() {
 
@@ -183,11 +184,8 @@ $(document).ready(function() {
         trivia.startGame();
         createOptions();
         timerRunning();
-        guessChecker(); 
+        trivia.guessChecker();
+
     })
-
-
-
-
 
 });
