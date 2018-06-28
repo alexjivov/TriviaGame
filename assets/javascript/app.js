@@ -10,6 +10,7 @@ var trivia = {
     timer : 30,
     timerOn : false,
     timerId : '',
+    questionCounter : 0, 
 
 // the questions
 
@@ -56,9 +57,6 @@ answers : {
 
  // Evaluating the click options - function
  guessChecker:  function() {
-
-    //timer ID for gameResult Time end
-    var resultId;
 
     //answer to the current asked question
     var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
@@ -107,7 +105,12 @@ trivia.nextQuestion();
 },
 //questions and options loop
 nextQuestion : function() {
-
+    var questionArray = Object.keys(trivia.questions); //['q1', 'q2']
+    var questionKey = questionArray[this.questionCounter]; // 'q1'
+    var questionText = trivia.questions[questionKey]; 
+    console.log(questionText);
+    $('#question').text(questionText);
+    
  //30 second timer
     trivia.timer = 30;
     $('#timer').text(trivia.timer);
@@ -122,8 +125,8 @@ nextQuestion : function() {
 };
 //create trivia questions in html
 function createOptions() {
-    $.each(trivia, function(index, key) {
-        $('#options').text($('<button class="option-btn">'+ key +'</button>'));
+    $.each(trivia.options, function(index, key) {
+        $('#options').append('<button class="option-btn">'+ key +"</button>");
     })
 
 }
@@ -140,7 +143,7 @@ function timerRunning() {
         clearInterval(trivia.timerId);
         resultID = setTimeout(trivia.guessResult, 1000);
         //generate the results in the HTML
-        $('#finalResults').html('<h2>Out of time! The answers were ' + Object.values(trivia.answers)[trivia.currentSet] +'</h2');
+        $('#finalResults').html('<h2>Out of time! The answers were ' + Object.values(trivia.answers) +'</h2');
     }
     // if all questiosn shown at the end, show the results
     else if(trivia.currentSet === Object.key(trivia.questions).length) {
