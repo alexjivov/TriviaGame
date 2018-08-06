@@ -30,7 +30,7 @@ function buildQuiz() {
             output.push(
                 <div class="question"> ${currentQuestion.question} </div>
                 <div class="answers"> ${answers.join("")}</div>
-
+            // THE BELOW PARENTHESES ); cause an error: JSX expressions must have one parent element
             );
         });
     quizContainer.innerHTML = output.join("");
