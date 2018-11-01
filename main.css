@@ -1,0 +1,62 @@
+.jumbotron {
+    background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+color: white;
+text-align: center; 
+}
+
+.quizHeader {
+    font-size: 40px; 
+    text-align: center; 
+    font-family: 'Inconsolata', monospace;
+}
+
+#count-wrapper {
+    color: #ffffff;
+}
+
+#start {
+    position: relative;
+    margin-top: 10%; 
+    font-size: 60px; 
+    border-radius: 10%;
+    background-color: #38ef7d;
+    border: 5px solid #ffffff;
+}
+
+#quiz-table {
+    margin-top: -2%;
+    height: 700px; 
+    width: 100%; 
+    background-color: #11998e;
+    color: white;
+    text-align: center; 
+}
+
+h2 {
+    margin: 15px; 
+}
+
+input {
+    margin: 10px;
+}
+
+
+div {
+    padding-left: 30px; 
+}
+
+#submit-btn {
+    background: #11998e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+color: white;
+margin-left: 46.5%;
+font-size: 30px; 
+}
+
+#submit-btn:hover {
+    background: grey; 
+  
+}
