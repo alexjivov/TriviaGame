@@ -58,7 +58,7 @@ var game = {
         }
 
     //appends a controller submit button to the existing div
-    panel.append("<button id='#submit-btn'>Submit</button>")
+    panel.append("<div id='#submit-div'><button id='#submit-btn'>Submit</button></div>")
     },
 
     //function handling the quiz completion - tied to the submit button
@@ -113,7 +113,7 @@ var game = {
     panel.append("<h3>Incorrect: " + this.incorrect + "</h3>");
     //Subtracts Incorrect and Correct from total to find the Unanswered questions
     panel.append("<h3>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
-
+    
     }
 };
 
@@ -124,7 +124,8 @@ $(document).on("click","#start", function() {
 });
 
 //Submit button handle
-$(document).on("click","submit-btn",function() {
+$('#submit-div').on("click","#submit-btn",function() {
+    console.log('Button responding');
     game.done();
 });
 
