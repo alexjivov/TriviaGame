@@ -14,7 +14,7 @@ text-align: center;
 
 #count-wrapper {
     color: #ffffff;
-    border: 5px dotted #ffff;
+
     padding: 5px; 
 }
 
@@ -25,6 +25,10 @@ text-align: center;
     border-radius: 10%;
     background-color: #38ef7d;
     border: 5px solid #ffffff;
+}
+
+hr {
+    background-color: white; 
 }
 
 #quiz-table {
@@ -49,11 +53,17 @@ div {
     padding-left: 30px; 
 }
 
-button, select {
+
+
+#submit-btn {
     position: relative;
-    bottom: 5%; 
     font-size: 60px; 
     border-radius: 10%;
     background-color: #38ef7d;
     border: 5px solid #ffffff;
+    margin-top: 2%; 
+
+
+ 
 }
+

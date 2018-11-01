@@ -25,6 +25,7 @@ var questions = [{
 //Variable for the setInterval timer 
 var timer;
 
+
 var game = {
 
     correct: 0,
@@ -47,6 +48,8 @@ var game = {
         $("#count-wrapper").prepend("<h2>Time Remaining: <span id='counter-number'>60</span>&nbspSeconds</h2> ");
         // Removes the start button 
         $("#start").remove();
+     
+       
 
         //adds the questions to the quiz area wrapper - including a radio to tie them to the function
         for (var i=0; i < questions.length; i++) {
@@ -57,8 +60,7 @@ var game = {
             }
         }
 
-    //appends a controller submit button to the existing div
-    panel.append("<div id='#submit-div'><button id='#submit-btn'>Submit</button></div>")
+
     },
 
     //function handling the quiz completion - tied to the submit button
@@ -117,6 +119,8 @@ var game = {
     }
 };
 
+
+
 //Click handle events to actually run the game
 // Start button handle
 $(document).on("click","#start", function() {
@@ -124,7 +128,7 @@ $(document).on("click","#start", function() {
 });
 
 //Submit button handle
-$('#submit-div').on("click","#submit-btn",function() {
+$(document).on("click","#submit-btn",function() {
     console.log('Button responding');
     game.done();
 });
